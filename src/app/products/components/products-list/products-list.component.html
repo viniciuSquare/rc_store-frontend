@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngIf="!isListPopulated" > <h1>Não há produtos, adicione para visuaizar</h1> </ion-item>
+      <ion-item *ngFor="let product of products" ngIf="isListPopulated">
+        <ion-grid>
+          <ion-row class="ion-justify-content-between">
+            <ion-text>
+              {{product.name}}
+            </ion-text>
+            <ion-button  > <ion-icon name="add" ></ion-icon> </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

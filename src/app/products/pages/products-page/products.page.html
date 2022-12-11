@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-justify-content-between ion-padding-end" >
+        <ion-title>Produtos</ion-title>
+        <ion-buttons end>
+          <button ion-button icon-only color="royal">
+            <ion-icon name="search"></ion-icon>
+          </button>
+          <button ion-button icon-only color="royal">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <!-- LIST PRODUCTS -->
+  <products-list #products></products-list>
+  <ion-footer>
+    <ion-buttons >
+      <ion-button>
+        <ion-icon name="add"></ion-icon>
+        Criar um produto
+      </ion-button>
+    </ion-buttons>
+  </ion-footer>
+</ion-content>
