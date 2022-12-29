@@ -2,6 +2,7 @@ import { Serializable } from "src/app/base/serialazable";
 
 
 export class ProductCategory extends Serializable {
+  public id: number = null;
   public name: string = null;
   public fatherCategory?: ProductCategory = null;
 

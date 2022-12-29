@@ -18,23 +18,17 @@ export class SideMenu {
       url: '/products',
       icon: 'pricetags',
       showDetails: false,
-      subPages: [
-        {
-          default: true,
-          title: 'Listagem de produtos',
-          subtitle: 'subtitle',
-          url: '',
-          icon: this.favIcos.list,
-          showDetails: false,
-        },
-        {
-          default: true,
-          title: 'Criar produto',
-          subtitle: 'subtitle',
-          url: '/create',
-          icon: 'add',
-          showDetails: false,
-        },
+      default: true,
+      subtitle: 'subtitle'
+        // },
+        // {
+        //   default: true,
+        //   title: 'Criar produto',
+        //   subtitle: 'subtitle',
+        //   url: '/create',
+        //   icon: 'add',
+        //   showDetails: false,
+        // },
         // {
         //   default: true,
         //   title: 'Editar produto',
@@ -43,30 +37,31 @@ export class SideMenu {
         //   icon: 'cut',
         //   showDetails: false,
         // }
-      ]
     },
     {
       title: 'Cotrole de estoque',
       url: '/stock',
       icon: 'paper',
       showDetails: false,
-      subPages: [
-        {
-          default: false,
-          title: 'Movimentações de produtos',
-          subtitle: 'subtitle',
-          url: '/movements',
-          icon: this.favIcos.list,
-          showDetails: false,
-        },
-        {
-          default: true,
-          title: 'Nova movimentação',
-          subtitle: 'subtitle',
-          url: '/movements/create',
-          icon: 'add',
-          showDetails: false,
-        },
+      default: true,
+      subtitle: 'subtitle'
+      // subPages: [
+      //   {
+      //     default: false,
+      //     title: 'Movimentações de produtos',
+      //     subtitle: 'subtitle',
+      //     url: '/movements',
+      //     icon: this.favIcos.list,
+      //     showDetails: false,
+      //   },
+      //   {
+      //     default: true,
+      //     title: 'Nova movimentação',
+      //     subtitle: 'subtitle',
+      //     url: '/movements/create',
+      //     icon: 'add',
+      //     showDetails: false,
+      //   },
         // {
         //   default: true,
         //   title: 'Editar movimentação de produto',
@@ -75,7 +70,7 @@ export class SideMenu {
         //   icon: 'add',
         //   showDetails: false,
         // },
-      ]
+      // ]
     },
     {
       title: 'Fornecedores',

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../product.service';
@@ -16,54 +17,57 @@ export class ProductCreationFormComponent implements OnInit {
 
   public product = new Product();
 
+  public showNewCategoryInput = false;
 
   constructor(
-    private service: ProductService
-  ) {
-
-    this.product.category = new ProductCategory();
-  }
+    private productService: ProductService,
+    private activedRoute: ActivatedRoute
+  ) {  }
 
   ngOnInit() {
-    this.service.getProductCategories().then(
-      response => {
-        response.data.map( category => {
-          this.categories.push( new ProductCategory(category) )
-          console.log(new ProductCategory(category))
-
-        })
-      }
-    ).finally( () => console.log(this.categories))
+    this.activedRoute.data.subscribe( ({categories}) => {
+      this.categories = categories
+    })
   }
 
-  submitProduct() {
-    this.service.store(this.product)
+  submitToStoreProduct() {
+    console.log(this.product)
+    this.productService.store(this.product)
       .then( response => {
+        console.log(response)
         this.onProductSubmitted.emit(response.data);
     });
   }
 
   selectedCategory(category) {
-    console.log(category.target.value)
-
     if(category.target.value=="new") {
-      console.log(category.target.value)
-
+      this.toggleNewCategoryInputVisibility();
       return
     }
+
     this.product.category = category.target.value
   }
 
   storeCategory() {
-    console.log(this.product.category)
-    this.service.storeCategory(this.product.category)
-      .then(
-        response => console.log(response.data)
+    this.productService.storeCategory(this.product.category)
+      .then(  newCategoryArray =>{
+        this.categories.push( new ProductCategory(newCategoryArray[0]) );
+        this.storedCategoryAsProductSelectedCategory();
+      })
+      .finally(()=>
+        this.toggleNewCategoryInputVisibility()
       );
+  }
+
+  storedCategoryAsProductSelectedCategory() {
+    this.product.category = this.categories[this.categories.length-1]
+  }
+
+  toggleNewCategoryInputVisibility() {
+    this.showNewCategoryInput = !this.showNewCategoryInput;
   }
 
   get isCategorySaved() {
     return !!this.product.category?.id
   }
-
 }

@@ -5,68 +5,74 @@
       <ion-button><ion-icon name="close"></ion-icon></ion-button>
     </ion-buttons>
   </ion-card-header>
-  <ion-item>
-    <ion-label>Nome</ion-label>
-    <ion-input
-      class="ion-text-right"
-      type="text" [ngModel]="product.name"
+  <ion-content>
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="product.name"
       ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Price</ion-label>
-    <ion-input
-      class="ion-text-right"
-      type="number"
-      [ngModel]="product.price"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Estoque inicial</ion-label>
-    <ion-input
-      class="ion-text-right"
-      type="number"
-      [ngModel]="product.quantity"
-    ></ion-input>
-  </ion-item>
-  <!-- CATEGORY SELECTION -->
-  <ion-item>
-    <ion-select #select
-      (ionChange)="selectedCategory($event)"
-      [(ngModel)]="product.category.id"
-      interface="popover"
-      placeholder="Selecione categoria"
-    >
-      <ion-select-option *ngFor="let item of categories;" [value]="item.id">
-        {{item.name}}
-      </ion-select-option>
-      <ion-select-option value="new">
-        <ion-icon name="add" ></ion-icon>
-        Nova categoria
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item id="category-creation-item"
-    [hidden]="!(select.value=='new')"
-    [disabled]="isCategorySaved"
-    >
-    <ion-label >Criar categoria</ion-label>
-    <ion-input
-      class="ion-text-right"
-      type="text"
-      [(ngModel)]="product.category.name"
-    ></ion-input>
-    <ion-button
-      (click)="storeCategory()"
-    >
-      <ion-icon name="add" ></ion-icon>
-    </ion-button>
-  </ion-item>
-
-  <ion-buttons>
-    <ion-button (ionClick)="submitProduct" >
-      <ion-icon name="add">Adicionar</ion-icon>
-    </ion-button>
-  </ion-buttons>
-
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Preço de Venda</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="product.salePrice"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Preço de Custo</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="product.costPrice"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label position="floating">Estoque inicial</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="product.stock"
+      ></ion-input>
+    </ion-item>
+    <!-- CATEGORY SELECTION -->
+    <ion-item>
+      <ion-select
+        #select
+        (ionChange)="selectedCategory($event)"
+        [(ngModel)]="product.category"
+        interface="popover"
+        placeholder="Selecione categoria"
+      >
+        <ion-select-option *ngFor="let item of categories" [value]="item">
+          {{ item.name }}
+        </ion-select-option>
+        <ion-select-option value="new">
+          <ion-icon name="add"></ion-icon>
+          Nova categoria
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item id="category-creation-item" [hidden]="!showNewCategoryInput">
+      <ion-label>Criar categoria</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="product.category.name"
+      ></ion-input>
+      <ion-button (click)="storeCategory()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-content>
 </ion-card>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="submitToStoreProduct()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

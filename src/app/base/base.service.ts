@@ -13,8 +13,8 @@ export class BaseService {
     return `${this.api_url}/${this.url}`;
   }
 
-  buildUrl(path: any = '') {
-    return `${this.base_url}${path}`;
+  buildUrl(path: string = '') {
+    return `${this.base_url}/${path}`;
   }
 
   useUrl(path: any) {
@@ -35,7 +35,7 @@ export class BaseService {
   }
 
   update(model: Serializable): Promise<any> {
-    return this.http.put(this.buildUrl('/' + model.id), model.http_data).toPromise();
+    return this.http.put(this.buildUrl(model.id), model.http_data).toPromise();
   }
 
   delete(id: any): Promise<any> {

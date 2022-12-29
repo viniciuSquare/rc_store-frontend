@@ -12,11 +12,12 @@ export class ProductResolver implements Resolve<Product> {
 
   instanceProduct = product => new Product(product);
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Product> | Promise<Product> | Product {
-    return this.productService.get().then(
-      response => {
-        return response
-      }
+  resolve(route: ActivatedRouteSnapshot): Promise<Product>{
+    const productId = route.paramMap.get("productId");
+    const urlParams = productId ? `?id=${ productId }` : '';
+
+    return this.productService.get(`${urlParams}`).then(
+      ({ data: products }) => products.map( product => new Product(product))
     ).catch(
       error => {
         console.log(error)

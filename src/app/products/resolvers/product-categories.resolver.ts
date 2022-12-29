@@ -20,11 +20,10 @@ export class ProductCategoriesResolver implements Resolve<ProductCategory> {
   instanceCategory = category => new ProductCategory(category);
 
   resolve(route: ActivatedRouteSnapshot): Observable<ProductCategory> | Promise<ProductCategory> | ProductCategory {
-    return this.productService.getProductCategories().then(
-      response => response
-    ).catch(
+    return this.productService.getProductCategories()
+    .catch(
       error => {
-        console.log(error)
+        console.log("erro aqui", error)
         return null;
       }
     )

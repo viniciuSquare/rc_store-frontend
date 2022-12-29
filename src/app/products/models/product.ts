@@ -6,9 +6,10 @@ export class Product extends Serializable {
 
   public id: number = null;
   public name: string = '';
-  public price: number = null;
-  public quantity: number = null;
-  public category?: ProductCategory = null;
+  public salePrice: number = null;
+  public costPrice: number = null;
+  public stock: number = null;
+  public category? = new ProductCategory();
 
 
   constructor(data: Object = {}) {
@@ -27,9 +28,10 @@ export class Product extends Serializable {
     return {
       id: this.id,
       name: this.name,
-      price: this.price,
-      productCategoryId: this.productCategoryId,
-      quantity: this.quantity
+      sale_price: this.salePrice,
+      cost_price: this.costPrice,
+      product_category_id: this.productCategoryId,
+      stock: this.stock
     }
   }
 

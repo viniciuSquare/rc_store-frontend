@@ -1,0 +1,16 @@
+ion-content {
+  position: relative;
+}
+
+ion-content ion-button {
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+
+  height: 2rem;
+
+  ion-icon {
+    margin-right: 0.25rem;
+  }
+
+}
