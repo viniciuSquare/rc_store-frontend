@@ -16,12 +16,13 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.activedRoute.data.subscribe( ({products}) => {
-      return this.populate(products.data)
+      console.log(products)
+      this.populate(products);
     })
   }
 
   populate(products: Array<Product>) {
-    products.map( product =>  this.products.push(new Product(product)));
+    this.products = products
   }
 
   get isListPopulated() {

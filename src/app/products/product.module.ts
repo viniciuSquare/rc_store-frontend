@@ -4,11 +4,15 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductResolver } from './resolvers/products.resolver';
-import { ProductsIndexPage } from './pages/products-page/products.page';
-import { CreateProductPage } from './pages/create-product/create-product.page';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ProductCategoriesResolver } from './resolvers/product-categories.resolver';
 import { ProductCreationFormComponent } from './components/product-creation-form/product-creation-form.component';
+import { ProductService } from './product.service';
+import { ProductEditFormComponent } from './components/product-edit-form/product-edit-form.component';
+import { CreateProductPage } from './pages/create-product/create.page';
+import { EditProductPage } from './pages/edit/edit.page';
+import { MovementsModule } from '../movements/movements.module';
+import { ProductsIndexPage } from './pages/products/products.page';
 
 const routes: Routes = [
   {
@@ -32,10 +36,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'edit',
-    component: CreateProductPage,
+    path: 'edit/:productId',
+    component: EditProductPage,
     resolve: {
-      categories: ProductResolver
+      products: ProductResolver,
+      categories: ProductCategoriesResolver
     },
     data: {
       title: '{} | Products Page'
@@ -45,17 +50,22 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ProductsIndexPage,
     ProductsListComponent,
-    ProductCreationFormComponent
+    ProductsIndexPage,
+    ProductCreationFormComponent,
+    CreateProductPage,
+    ProductEditFormComponent,
+    EditProductPage
   ],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
     FormsModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MovementsModule
   ],
+  providers: [ ProductService ],
   exports: [RouterModule]
 })
 export class ProductModule { }

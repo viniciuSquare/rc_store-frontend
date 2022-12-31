@@ -1,0 +1,10 @@
+#list-header {
+  ion-text {
+    font-weight: bolder;
+    font-size: 1.2rem;
+  }
+}
+ion-row {
+  display: grid;
+  grid-template-columns: 2.6fr 1fr 1.2fr 0.6fr;
+}

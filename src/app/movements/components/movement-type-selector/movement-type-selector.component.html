@@ -1,0 +1,13 @@
+<ion-item>
+  <ion-label>Tipo da movimentação</ion-label>
+  <ion-select
+    #select
+    [(ngModel)]="selected"
+    interface="popover"
+    placeholder="Selecione tipo da movimentação"
+  >
+    <ion-select-option *ngFor="let item of types" [value]="item">
+      {{ item.name }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>

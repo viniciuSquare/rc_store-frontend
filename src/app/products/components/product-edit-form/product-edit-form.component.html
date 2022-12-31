@@ -1,0 +1,84 @@
+<ion-card>
+  <ion-card-header class="ion-justify-content-between">
+    <h2>Atualizar Produto</h2>
+  </ion-card-header>
+
+  <ng-container *ngIf="product">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="product.name"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Preço de Venda</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="product.salePrice"
+      ></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Estoque atual</ion-label>
+          <ion-input
+            (ionChange)="stockChange($event)"
+            type="number"
+            [ngModel]="product.stock"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item disabled>
+          <ion-label position="floating">Estoque inicial</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="product.stock"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!-- CATEGORY SELECTION -->
+    <ion-item>
+      <ion-select
+        #select
+        (ionChange)="selectedCategory($event)"
+        [(ngModel)]="product.category"
+        interface="popover"
+        placeholder="Selecione categoria"
+      >
+        <ion-select-option *ngFor="let item of categories" [value]="item">
+          {{ item.name }}
+        </ion-select-option>
+        <ion-select-option value="new">
+          <ion-icon name="add"></ion-icon>
+          Nova categoria
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- NEW CATEGORY -->
+    <ion-item id="category-creation-item" [hidden]="!showNewCategoryInput">
+      <ion-label position="floating">Criar categoria</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="product.category.name"
+      ></ion-input>
+      <ion-button (click)="storeCategory()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <!-- MOVEMENT TYPE -->
+    <movement-type-selector
+      #typeSelector
+      *ngIf="showMovementTypeSelector"
+      [operator]="movementOperator"
+    ></movement-type-selector>
+  </ng-container>
+</ion-card>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="submitToUpdateProduct()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
