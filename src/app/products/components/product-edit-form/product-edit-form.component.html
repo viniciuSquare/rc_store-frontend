@@ -23,7 +23,7 @@
         <ion-item>
           <ion-label position="floating">Estoque atual</ion-label>
           <ion-input
-            (ionChange)="stockChange($event)"
+            (ionChange)="handleInputedStock($event)"
             type="number"
             [ngModel]="product.stock"
           ></ion-input>
@@ -69,10 +69,11 @@
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-item>
+
     <!-- MOVEMENT TYPE -->
     <movement-type-selector
       #typeSelector
-      *ngIf="showMovementTypeSelector"
+      [hidden]="!showMovementTypeSelector"
       [operator]="movementOperator"
     ></movement-type-selector>
   </ng-container>

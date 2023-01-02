@@ -1,8 +1,8 @@
-<ion-item>
+<ion-item >
   <ion-label>Tipo da movimentação</ion-label>
   <ion-select
     #select
-    [(ngModel)]="selected"
+    [(ngModel)]="movementation.type"
     interface="popover"
     placeholder="Selecione tipo da movimentação"
   >
@@ -10,4 +10,12 @@
       {{ item.name }}
     </ion-select-option>
   </ion-select>
+</ion-item>
+<ion-item>
+  <ion-label>Custo da Movimentação</ion-label>
+  <ion-input
+    type="currency"
+    [(ngModel)]="movementation.cost"
+    placeholder="Custo por unidade"
+  ></ion-input>
 </ion-item>

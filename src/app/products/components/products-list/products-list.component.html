@@ -16,6 +16,9 @@
             <ion-col>
               <ion-text>Preço de Vendas</ion-text>
             </ion-col>
+            <ion-col>
+              <ion-text>Estoque</ion-text>
+            </ion-col>
             <span>Opções</span>
           </ion-row>
         </ion-grid>
@@ -33,6 +36,9 @@
             </ion-col>
             <ion-col>
               R$ {{ product.salePrice }}
+            </ion-col>
+            <ion-col>
+              {{ product.stock }}
             </ion-col>
             <div>
               <ion-button

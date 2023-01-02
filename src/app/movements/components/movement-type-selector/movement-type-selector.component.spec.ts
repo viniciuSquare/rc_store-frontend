@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MovementTypeSelectorComponent } from './movement-type-selector.component';
+import { MovementDetailsComponent } from './movement-type-selector.component';
 
-describe('MovementTypeSelectorComponent', () => {
-  let component: MovementTypeSelectorComponent;
-  let fixture: ComponentFixture<MovementTypeSelectorComponent>;
+describe('MovementDetailsComponent', () => {
+  let component: MovementDetailsComponent;
+  let fixture: ComponentFixture<MovementDetailsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MovementTypeSelectorComponent ],
+      declarations: [ MovementDetailsComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MovementTypeSelectorComponent);
+    fixture = TestBed.createComponent(MovementDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

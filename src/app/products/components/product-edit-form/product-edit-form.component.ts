@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MovementTypeSelectorComponent } from 'src/app/movements/components/movement-type-selector/movement-type-selector.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MovementDetailsComponent } from 'src/app/movements/components/movement-type-selector/movement-type-selector.component';
+import { Movement } from 'src/app/movements/models/movement';
 import { MovementType } from 'src/app/movements/models/movementType';
-import { movementService } from 'src/app/movements/movement.service';
+import { MovementService } from 'src/app/movements/movement.service';
 import { Product } from '../../models/product';
 import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../product.service';
@@ -18,7 +19,7 @@ export class ProductEditFormComponent implements OnInit {
   @Input() product: Product = null;
   @Input() categories: Array<ProductCategory> = [];
 
-  @ViewChild('typeSelector') typeSelector: MovementTypeSelectorComponent;
+  @ViewChild('typeSelector') typeSelector: MovementDetailsComponent;
 
 
   public initialStock: number = null;
@@ -34,8 +35,7 @@ export class ProductEditFormComponent implements OnInit {
   public movementOperator: 1|0 = null;
 
   constructor(
-    private productService: ProductService,
-    private movementService: movementService
+    private productService: ProductService
   ) {  }
 
   ngOnInit() {  }
@@ -43,22 +43,44 @@ export class ProductEditFormComponent implements OnInit {
   /**
    * Check movement type from difference between initial stock and current - inputed
    * */
-  stockChange(event) {
-    const { value: currentStock } = event.target;
+  handleInputedStock(event) {
+    const { value: inputedStock } = event.target;
+
+    const isProductStockUpdate = inputedStock != this.product.stock && inputedStock != '';
 
     // There is change of stock
-    if( currentStock != this.product.stock && currentStock != '' ) {
-      this.movementOperator = currentStock > this.product.stock ? 1 : 0;
+    if( isProductStockUpdate ) {
+      // SHOW MOVEMENTATION FORM
       this.showMovementTypeSelector = true;
+
+      this.feedComponentMovementationData(inputedStock);
+    } else {
+      if( this.showMovementTypeSelector ) {
+        this.toggleMovementTypeSelectorVisibility();
+      }
     }
   }
 
+  feedComponentMovementationData(currentStock: number) {
+    this.movementOperator = currentStock > this.product.stock ? 1 : 0;
+    const movementedQuantity = Math.abs(this.product.stock - currentStock);
+
+    // Feed movementation data on component
+    this.typeSelector.movementation = new Movement({
+      quantity: movementedQuantity,
+      cost: this.typeSelector.movementation.cost,
+      type: this.typeSelector.movementation.type,
+      product: this.product,
+      previousStock: this.product.stock
+    })
+
+  }
+
   submitToUpdateProduct() {
-    this.productService.update(this.product)
-      .then( response => {
-        console.log(response)
-        this.onProductSubmitted.emit(response.data);
-    });
+    this.productService.updateStock(this.typeSelector.movementation)
+      .then(response => {
+
+      });
   }
 
   selectedCategory(category) {

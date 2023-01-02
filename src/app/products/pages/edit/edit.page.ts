@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductEditFormComponent } from '../../components/product-edit-form/product-edit-form.component';
 import { Product } from '../../models/product';
 import { ProductCategory } from '../../models/productCategory';
@@ -15,9 +15,9 @@ export class EditProductPage implements OnInit {
   public product: Product = null;
   public categories: ProductCategory[] = null;
 
-
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,4 +27,7 @@ export class EditProductPage implements OnInit {
     } )
   }
 
+  redirectToListPage() {
+    this.router.navigate(['/products']);
+  }
 }

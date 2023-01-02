@@ -5,7 +5,7 @@ import { MovementsResolver } from './movements-resolver.resolver';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { MovementTypeSelectorComponent } from './components/movement-type-selector/movement-type-selector.component';
+import { MovementDetailsComponent } from './components/movement-type-selector/movement-type-selector.component';
 
 const routes: Routes = [
   {
@@ -22,10 +22,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    MovementTypeSelectorComponent
+    MovementDetailsComponent
   ],
   exports: [
-    MovementTypeSelectorComponent
+    MovementDetailsComponent
   ],
   imports: [
     RouterModule.forChild(routes),
