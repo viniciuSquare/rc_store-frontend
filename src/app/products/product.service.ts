@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { BaseService } from '../base/base.service';
+import { Movement } from '../movements/models/movement';
+import { MovementType } from '../movements/models/movementType';
+import { MovementService } from '../movements/movement.service';
 import { Product } from './models/product';
 import { ProductCategory } from './models/productCategory';
 
@@ -8,7 +11,10 @@ import { ProductCategory } from './models/productCategory';
 export class ProductService extends BaseService {
   protected url: string = 'api/products';
 
-  constructor(injector: Injector) {
+  constructor(
+    injector: Injector,
+    private movementService: MovementService
+  ) {
     super();
     this.http = injector.get(HttpClient);
   }
@@ -30,6 +36,11 @@ export class ProductService extends BaseService {
 
   storeCategory(category: ProductCategory): Promise<any> {
     return this.http.post(this.buildUrl("categories") , category.http_data )
+      .toPromise();
+  }
+
+  updateStock( movement: Movement ){
+    return this.http.post(this.buildUrl('movement'), movement.http_data )
       .toPromise();
   }
 }

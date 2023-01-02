@@ -1,4 +1,5 @@
 import { Serializable } from "src/app/base/serialazable";
+import { Movement } from "src/app/movements/models/movement";
 
 import { ProductCategory } from "./productCategory";
 
@@ -11,6 +12,7 @@ export class Product extends Serializable {
   public stock: number = null;
   public category? = new ProductCategory();
 
+  public movements:Movement[] = null;
 
   constructor(data: Object = {}) {
     super();

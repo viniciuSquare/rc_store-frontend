@@ -5,7 +5,7 @@ import { Movement } from './models/movement';
 import { MovementType } from './models/movementType';
 
 @Injectable({ providedIn: 'root' })
-export class movementService extends BaseService {
+export class MovementService extends BaseService {
   protected url: string = 'api/movements';
 
   constructor(injector: Injector) {

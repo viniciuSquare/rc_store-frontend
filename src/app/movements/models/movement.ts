@@ -7,10 +7,12 @@ export class Movement extends Serializable {
 
   public id: number = null;
   public product: Product = null;
-  public price: number = null;
+  public cost: number = null;
   public quantity: number = null;
   public type? = new MovementType();
 
+  public description: string = null;
+  public previousStock: number = null;
 
   constructor(data: Object = {}) {
     super();
@@ -28,7 +30,9 @@ export class Movement extends Serializable {
     return {
       id: this.id,
       product_id: this.productId,
-      price: this.price,
+      description: this.getDescription(),
+      previous_stock: this.previousStock,
+      cost: this.cost,
       quantity: this.quantity,
       movement_type_id: this.movementTypeId
     }
@@ -40,5 +44,10 @@ export class Movement extends Serializable {
 
   get productId() {
     return this.product ? this.product.id : null;
+  }
+
+  getDescription() {
+    return this.type.name + " de " + this.quantity + " de " + this.product?.name
+      + ". Custo de R$" + this.cost + "/ UN, Total: R$" + this.cost * this.quantity
   }
 }
