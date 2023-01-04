@@ -20,57 +20,32 @@ export class SideMenu {
       showDetails: false,
       default: true,
       subtitle: 'subtitle'
-        // },
-        // {
-        //   default: true,
-        //   title: 'Criar produto',
-        //   subtitle: 'subtitle',
-        //   url: '/create',
-        //   icon: 'add',
-        //   showDetails: false,
-        // },
-        // {
-        //   default: true,
-        //   title: 'Editar produto',
-        //   subtitle: 'subtitle',
-        //   url: '/edit',
-        //   icon: 'cut',
-        //   showDetails: false,
-        // }
     },
     {
       title: 'Cotrole de estoque',
-      url: '/stock',
+      url: '/products',
       icon: 'paper',
       showDetails: false,
       default: true,
-      subtitle: 'subtitle'
-      // subPages: [
-      //   {
-      //     default: false,
-      //     title: 'Movimentações de produtos',
-      //     subtitle: 'subtitle',
-      //     url: '/movements',
-      //     icon: this.favIcos.list,
-      //     showDetails: false,
-      //   },
-      //   {
-      //     default: true,
-      //     title: 'Nova movimentação',
-      //     subtitle: 'subtitle',
-      //     url: '/movements/create',
-      //     icon: 'add',
-      //     showDetails: false,
-      //   },
-        // {
-        //   default: true,
-        //   title: 'Editar movimentação de produto',
-        //   subtitle: 'subtitle',
-        //   url: '/movements/edit',
-        //   icon: 'add',
-        //   showDetails: false,
-        // },
-      // ]
+      subtitle: 'subtitle',
+      subPages: [
+        {
+          default: true,
+          title: 'Estoque',
+          subtitle: 'subtitle',
+          url: '/stock',
+          icon: 'add',
+          showDetails: false,
+        },
+        {
+          default: false,
+          title: 'Movimentações de produtos',
+          subtitle: 'subtitle',
+          url: '/movements',
+          icon: this.favIcos.list,
+          showDetails: false,
+        }
+      ]
     },
     {
       title: 'Fornecedores',
@@ -93,10 +68,7 @@ export class SideMenu {
           showDetails: false,
         },
       ]
-
     }
-
-
   ]
 
   get pages() {
