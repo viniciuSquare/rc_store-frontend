@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-justify-content-between ion-padding-end" >
+        <ion-title>Estoque de Produtos</ion-title>
+        <!-- <ion-buttons end>
+          <ion-button ion-button icon-only color="royal">
+            <ion-icon name="settings"></ion-icon>
+          </ion-button>
+        </ion-buttons> -->
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="position: relative;">
+    <!-- LIST PRODUCTS -->
+  <products-list #products></products-list>
+  <ng-container
+  >
+    <ion-button
+      routerDirection="root" routerLink="create" routerLinkActive="selected"
+    >
+      <ion-icon name="add"></ion-icon>
+      Novo Produto
+    </ion-button>
+  </ng-container>
+</ion-content>

@@ -13,13 +13,17 @@ import { CreateProductPage } from './pages/create-product/create.page';
 import { EditProductPage } from './pages/edit/edit.page';
 import { MovementsModule } from '../movements/movements.module';
 import { ProductsIndexPage } from './pages/products/products.page';
+import { StockPage } from './pages/stock/stock.page';
+import { ProductCategoriesComponent } from './components/product-categories/product-categories.component';
+import { ProductCategoriesModalComponent } from './components/product-categories-modal/product-categories-modal.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ProductsIndexPage,
     resolve: {
-      products: ProductResolver
+      products: ProductResolver,
+      categories: ProductCategoriesResolver
     },
     data: {
       title: '{} | Products Page'
@@ -46,16 +50,29 @@ const routes: Routes = [
       title: '{} | Products Page'
     }
   },
+  {
+    path: 'stock',
+    component: StockPage,
+    resolve: {
+      products: ProductResolver
+    },
+    data: {
+      title: '{} | Estoque de Produtos'
+    }
+  },
 ]
 
 @NgModule({
   declarations: [
-    ProductsListComponent,
     ProductsIndexPage,
-    ProductCreationFormComponent,
     CreateProductPage,
+    EditProductPage,
+    StockPage,
+    ProductsListComponent,
+    ProductCreationFormComponent,
+    ProductCategoriesComponent,
     ProductEditFormComponent,
-    EditProductPage
+    ProductCategoriesModalComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -66,6 +83,6 @@ const routes: Routes = [
     MovementsModule
   ],
   providers: [ ProductService ],
-  exports: [RouterModule]
+  exports: [ RouterModule ]
 })
 export class ProductModule { }

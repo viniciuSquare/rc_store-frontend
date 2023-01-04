@@ -4,7 +4,7 @@
       <ion-row class="ion-justify-content-between ion-padding-end" >
         <ion-title>Produtos</ion-title>
         <ion-buttons end>
-          <ion-button ion-button icon-only color="royal">
+          <ion-button ion-button icon-only color="royal" (click)="toggleSettingsModalVisibility()">
             <ion-icon name="settings"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -13,15 +13,32 @@
   </ion-toolbar>
 </ion-header>
 <ion-content style="position: relative;">
-    <!-- LIST PRODUCTS -->
+  <!-- Categories settings -->
+  <ion-modal trigger="open-modal" [isOpen]="showSettingModal">
+    <product-categories *ngIf="showSettingModal"></product-categories>
+  </ion-modal>
+
+  <!-- LIST PRODUCTS -->
   <products-list #products></products-list>
-  <ng-container
-  >
-    <ion-button
-      routerDirection="root" routerLink="create" routerLinkActive="selected"
-    >
-      <ion-icon name="add"></ion-icon>
-      Novo Produto
-    </ion-button>
-  </ng-container>
 </ion-content>
+
+<ion-footer class="bottom">
+  <ion-toolbar class="ion-justify-between">
+    <ion-buttons slot="start">
+      <ion-button
+        id="open-modal"
+      >
+        <ion-icon name="list"></ion-icon>
+        <ion-text>Categorias de Produtos</ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button
+        routerDirection="root" routerLink="create" routerLinkActive="selected"
+      >
+        <ion-icon name="add"></ion-icon>
+        Novo Produto
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -16,7 +16,6 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.activedRoute.data.subscribe( ({products}) => {
-      console.log(products)
       this.populate(products);
     })
   }

@@ -12,17 +12,34 @@ export class ProductResolver implements Resolve<Product> {
 
   instanceProduct = product => new Product(product);
 
-  resolve(route: ActivatedRouteSnapshot): Promise<Product>{
+  resolve(route: ActivatedRouteSnapshot): Promise<Product> {
     const productId = route.paramMap.get("productId");
-    const urlParams = productId ? `?id=${ productId }` : '';
+    const urlParams = productId ? `?id=${productId}` : '';
 
-    return this.productService.get(`${urlParams}`).then(
-      ({ data: products }) => products.map( product => new Product(product))
-    ).catch(
-      error => {
-        console.log(error)
-        return null;
-      }
-    )
+    const customPath = route.url[0]?.path;
+
+    switch ( customPath ) {
+      case 'stock':
+        return this.productService.getStock().then(
+          ({ data: products }) => products.map(product => new Product(product))
+        ).catch(
+          error => {
+            console.log(error)
+            return null;
+          }
+        )
+
+      default:
+        return this.productService.get(`${urlParams}`).then(
+          ({ data: products }) => products.map(product => new Product(product))
+        ).catch(
+          error => {
+            console.log(error)
+            return null;
+          }
+        )
+    }
+
   }
+
 }

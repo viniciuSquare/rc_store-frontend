@@ -53,7 +53,7 @@ export class ProductEditFormComponent implements OnInit {
       // SHOW MOVEMENTATION FORM
       this.showMovementTypeSelector = true;
 
-      this.feedComponentMovementationData(inputedStock);
+      this.populateComponentMovementationData(inputedStock);
     } else {
       if( this.showMovementTypeSelector ) {
         this.toggleMovementTypeSelectorVisibility();
@@ -61,11 +61,11 @@ export class ProductEditFormComponent implements OnInit {
     }
   }
 
-  feedComponentMovementationData(currentStock: number) {
+  populateComponentMovementationData(currentStock: number) {
     this.movementOperator = currentStock > this.product.stock ? 1 : 0;
     const movementedQuantity = Math.abs(this.product.stock - currentStock);
 
-    // Feed movementation data on component
+    // populate movementation data on component
     this.typeSelector.movementation = new Movement({
       quantity: movementedQuantity,
       cost: this.typeSelector.movementation.cost,
